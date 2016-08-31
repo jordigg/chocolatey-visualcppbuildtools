@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
 	<metadata>
     <id>VisualCppBuildTools</id>
@@ -37,4 +37,7 @@ Example:
     <tags>Microsoft Visual C++ Build Tools 2015 admin</tags>
     <releaseNotes>- Updated to latest version with new logic including cheksum validation</releaseNotes>
   </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
 </package>
