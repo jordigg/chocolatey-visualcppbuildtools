@@ -23,7 +23,7 @@ Optional features (Phone tools, etc.) are available but not installed by default
 You can provide optional parameters to include them during the install.
 Here is example that includes the Android and iOS build tools:
 
-    choco install VisualCppBuildTools -packageParameters "--Features L_MDDCPlusPlus_iOS_V6,L_MDDCPlusPlus_Android_V6"
+    choco install VisualCppBuildTools -packageParameters "--Features Win81SDK_CppBuildSKUV1,Win10_EmulatorV1"
 
 ##### Available features: see AdminDeployment.xml
 

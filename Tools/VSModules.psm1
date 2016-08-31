@@ -117,26 +117,26 @@ function Generate-Install-Arguments-String($parameters, $adminFile)
 function Install-VS {
 <#
 .SYNOPSIS
-Installs Visual Studio
+Installs Microsoft Visual C++ Build Tools
 
 .DESCRIPTION
-Installs Visual Studio with ability to specify additional features and supply product key.
+Installs Microsoft Visual C++ Build Tools with ability to specify additional features.
 
 .PARAMETER PackageName
-The name of the VisualStudio package - this is arbitrary.
+The name of the Microsoft Visual C++ Build Tools package - this is arbitrary.
 It's recommended you call it the same as your nuget package id.
 
 .PARAMETER Url
 This is the url to download the VS web installer.
 
 .EXAMPLE
-Install-VS 'VisualStudio2015Community' 'http://download.microsoft.com/download/zzz/vs_community.exe'
+Install-VS 'VisualCppBuildTools' 'http://download.microsoft.com/download/5/f/7/5f7acaeb-8363-451f-9425-68a90f98b238/visualcppbuildtools_full.exe'
 
 .OUTPUTS
 None
 
 .NOTES
-This helper reduces the number of lines one would have to write to download and install Visual Studio.
+This helper reduces the number of lines one would have to write to download and install Microsoft Visual C++ Build Tools.
 This method has no error handling built into it.
 
 .LINK
@@ -144,56 +144,56 @@ Install-ChocolateyPackage
 #>
 param(
   [string] $packageName,
-  [string] $url
+  [string] $url,
+  [string] $exeName,
+  [string] $checksum
 )
-    Write-Debug "Running 'Install-VS' for $packageName with url:`'$url`'";
-
+        Write-Debug "Running 'Install-VS' for $packageName with url:`'$url`'";
+ 
     $installerType = 'exe'
     $validExitCodes = @(
         0, # success
         3010, # success, restart required
-        2147781575, # pending restart required
-        -2147185721, # pending restart required
-        -2147205120, # pending restart not required
-        -2147172352 # pending restart required
+        2147781575 # pending restart required
     )
-
+ 
     $defaultAdminFile = (Join-Path $PSScriptRoot 'AdminDeployment.xml')
     Write-Debug "Default AdminFile: $defaultAdminFile"
-
+ 
     $packageParameters = Parse-Parameters $env:chocolateyPackageParameters
     if ($packageParameters.Length -gt 0) { Write-Output $packageParameters }
-
+ 
     $adminFile = Generate-Admin-File $packageParameters $defaultAdminFile
     Write-Debug "AdminFile: $adminFile"
-
+ 
     Update-Admin-File $packageParameters $adminFile
-
+ 
     $silentArgs = Generate-Install-Arguments-String $packageParameters $adminFile
-
+    
     Write-Output "Install-ChocolateyPackage $packageName $installerType $silentArgs $url -validExitCodes $validExitCodes"
-    Install-ChocolateyPackage $packageName $installerType $silentArgs $url -validExitCodes $validExitCodes
+    Install-ChocolateyPackage $packageName $installerType $silentArgs $url -validExitCodes $validExitCodes -Checksum $checksum -ChecksumType sha256
+
 }
 
 function Uninstall-VS {
 <#
 .SYNOPSIS
-Uninstalls Visual Studio
+Uninstalls Microsoft Visual C++ Build Tools
 
 .DESCRIPTION
-Uninstalls Visual Studio.
+Uninstalls Microsoft Visual C++ Build Tools.
 
 .PARAMETER PackageName
-The name of the VisualStudio package.
+The name of the VisualCppBuildTools package.
 
 .PARAMETER ApplicationName
-The VisualStudio app name - i.e. 'Microsoft Visual Studio Community 2015'.
+The VisualStudio app name - i.e. 'Microsoft Visual C++ Build Tools'.
 
 .PARAMETER UninstallerName
 This name of the installer executable - i.e. 'vs_community.exe'.
 
 .EXAMPLE
-Uninstall-VS 'VisualStudio2015Community' 'Microsoft Visual Studio Community 2015' 'vs_community.exe'
+Uninstall-VS 'VisualCppBuildTools' 'Microsoft Visual C++ Build Tools' 'visualcppbuildtools_full.exe'
 
 .OUTPUTS
 None
