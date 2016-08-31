@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
 	<metadata>
     <id>VisualCppBuildTools</id>
-    <version>14.0.25123.0</version>
+    <version>14.0.25420.1</version>
     <title>Visual C++ Build Tools 2015</title>
     <authors>Microsoft</authors>
     <owners>Jivko Kolev, Kenneth Berntsen, Jordi Garcia</owners>
@@ -35,6 +35,6 @@ Example:
     choco install VisualCppBuildTools -packageParameters "--AdminFile http://path/to/your/AdminDeployment.xml"</description>
     <summary>Build tools (compiler, SDKs, no IDE) from VS 2015</summary>
     <tags>Microsoft Visual C++ Build Tools 2015 admin</tags>
-    <releaseNotes>- Created build tools package</releaseNotes>
+    <releaseNotes>- Updated to latest version with new logic including cheksum validation</releaseNotes>
   </metadata>
 </package>
